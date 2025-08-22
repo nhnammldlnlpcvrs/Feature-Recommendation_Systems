@@ -1,0 +1,9 @@
+version: 2
+
+models:
+  - name: stg_online_retail
+    description: "Cleaned and preprocessed retail data"
+  - name: dl_input
+    description: "User-item pairs for Deep Learning recommendation"
+  - name: fpgrowth_input
+    description: "Transaction-style item lists for FP-Growth"

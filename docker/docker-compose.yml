@@ -1,0 +1,33 @@
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    image: nhnammldlnlpcvrs/rs_fpgrowth-backend:latest
+    container_name: rs_backend-container
+    ports:
+      - "8000:8000"
+    volumes:
+      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/backend:/app/backend"
+      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/fp_growth_mba:/app/fp_growth_mba"
+      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/data:/app/data"
+      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/models:/app/models"
+      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/docker/profiles.yml:/root/.dbt/profiles.yml"
+    environment:
+      - PYTHONPATH=/app
+      - DBT_PROFILES_DIR=/root/.dbt
+  ui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.ui
+    image: nhnammldlnlpcvrs/rs_fpgrowth-ui:latest
+    container_name: rs_ui-container
+    environment: 
+      - API_URL=http://backend:8000
+    ports:
+      - "8501:8501"
+    volumes:
+      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/ui:/app/ui"
+      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/data:/app/data"
+    depends_on:
+      - backend

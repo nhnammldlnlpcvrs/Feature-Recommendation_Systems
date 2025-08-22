@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.xlsx
+*.csv
+logs/
+notebooks/
