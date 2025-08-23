@@ -1,10 +1,11 @@
 FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    MODEL_PATH=/app/models
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential curl \
+    build-essential curl git \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -12,8 +13,8 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r /app/requirements.txt
 
-COPY ui /app/ui
+COPY fp_growth_mba /app/fp_growth_mba
 
-EXPOSE 8501
+VOLUME ["/app/models"]
 
-CMD ["streamlit", "run", "ui/streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501"]
+CMD ["python", "-m", "backend/recommender_dl.py"]

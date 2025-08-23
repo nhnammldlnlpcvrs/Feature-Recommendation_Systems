@@ -11,3 +11,22 @@
 2025-07-14 23:20:39 | INFO     | uvicorn.error | Waiting for application shutdown.
 2025-07-14 23:20:39 | INFO     | uvicorn.error | Application shutdown complete.
 2025-07-14 23:20:39 | INFO     | uvicorn.error | Finished server process [31400]
+2025-08-23 14:34:34 | INFO     | uvicorn.error | Started server process [12064]
+2025-08-23 14:34:34 | INFO     | uvicorn.error | Waiting for application startup.
+2025-08-23 14:34:34 | INFO     | uvicorn.error | Application startup complete.
+2025-08-23 14:34:40 | INFO     | backend.main | GET /docs | 200 | 0.29 ms
+2025-08-23 14:34:40 | INFO     | uvicorn.access | 127.0.0.1:56944 - "GET /docs HTTP/1.1" 200
+2025-08-23 14:34:40 | INFO     | backend.main | GET /openapi.json | 200 | 4.91 ms
+2025-08-23 14:34:40 | INFO     | uvicorn.access | 127.0.0.1:56944 - "GET /openapi.json HTTP/1.1" 200
+2025-08-23 14:36:02 | INFO     | backend.main | by‑user request user_id=14911 top_k=3
+2025-08-23 14:36:02 | INFO     | backend.main | GET /recommend/by-user | 200 | 43.52 ms
+2025-08-23 14:36:02 | INFO     | uvicorn.access | 127.0.0.1:56978 - "GET /recommend/by-user?user_id=14911&top_k=3 HTTP/1.1" 200
+2025-08-23 14:36:04 | INFO     | backend.main | by‑item request item=red  harmonica in box top_k=3
+2025-08-23 14:36:04 | INFO     | backend.main | GET /recommend/by-item | 200 | 2.48 ms
+2025-08-23 14:36:04 | INFO     | uvicorn.access | 127.0.0.1:56982 - "GET /recommend/by-item?item=red++harmonica+in+box&top_k=3 HTTP/1.1" 200
+2025-08-23 14:36:06 | INFO     | backend.main | by‑item request item=charlotte bag suki design top_k=3
+2025-08-23 14:36:06 | INFO     | backend.main | GET /recommend/by-item | 200 | 2.45 ms
+2025-08-23 14:36:06 | INFO     | uvicorn.access | 127.0.0.1:56984 - "GET /recommend/by-item?item=charlotte+bag+suki+design&top_k=3 HTTP/1.1" 200
+2025-08-23 14:36:08 | INFO     | backend.main | by‑item request item=paper chain kit 50's christmas top_k=3
+2025-08-23 14:36:08 | INFO     | backend.main | GET /recommend/by-item | 200 | 2.32 ms
+2025-08-23 14:36:08 | INFO     | uvicorn.access | 127.0.0.1:56986 - "GET /recommend/by-item?item=paper+chain+kit+50%27s+christmas&top_k=3 HTTP/1.1" 200

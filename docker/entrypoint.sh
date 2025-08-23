@@ -1,8 +1,9 @@
-#!/usr/bin/env bash
-set -e  # có lỗi là dừng
+set -e
 
-dbt deps  --project-dir /app/fp_growth_mba
-dbt seed  --project-dir /app/fp_growth_mba
-dbt run   --project-dir /app/fp_growth_mba
+until nc -z "$DB_HOST" "$DB_PORT"; do
+  echo "Waiting for database $DB_HOST:$DB_PORT..."
+  sleep 2
+done
 
+echo "Starting backend..."
 exec uvicorn backend.main:app --host 0.0.0.0 --port 8000

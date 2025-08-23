@@ -1,33 +1,96 @@
+version: "3.9"
+
 services:
+  db:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.db
+    image: nhnammldlnlpcvrs/rs_fpgrowth-db:latest
+    container_name: rs_db-container
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: recommender
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ../db/initdb.d:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d recommender"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   backend:
     build:
       context: ..
       dockerfile: docker/Dockerfile.backend
     image: nhnammldlnlpcvrs/rs_fpgrowth-backend:latest
     container_name: rs_backend-container
+    environment:
+      - DB_HOST=db
+      - DB_USER=admin
+      - DB_PASSWORD=admin123
+      - DB_NAME=recommender
+      - DB_PORT=5432
     ports:
       - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+      dl:
+        condition: service_started
     volumes:
-      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/backend:/app/backend"
-      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/fp_growth_mba:/app/fp_growth_mba"
-      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/data:/app/data"
-      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/models:/app/models"
-      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/docker/profiles.yml:/root/.dbt/profiles.yml"
+      - ../backend:/app/backend
+      - ../data:/app/data
+
+  dl:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dl
+    image: nhnammldlnlpcvrs/rs_fpgrowth-dl:latest
+    container_name: rs_dl-container
     environment:
-      - PYTHONPATH=/app
+      - MODEL_PATH=/app/models
+    volumes:
+      - ../models:/app/models
+
+  dbt:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.dbt
+    image: nhnammldlnlpcvrs/rs_fpgrowth-dbt:latest
+    container_name: rs_dbt-container
+    volumes:
+      - ../fp_growth_mba:/app
+      - ./profiles.yml:/root/.dbt/profiles.yml:ro
+      - ../models:/app/models
+      - ../data:/app/data
+    environment:
       - DBT_PROFILES_DIR=/root/.dbt
+    depends_on:
+      db:
+        condition: service_healthy
+    command: tail -f /dev/null  # Keep the container running for interactive use
+
   ui:
     build:
       context: ..
       dockerfile: docker/Dockerfile.ui
     image: nhnammldlnlpcvrs/rs_fpgrowth-ui:latest
     container_name: rs_ui-container
-    environment: 
+    environment:
       - API_URL=http://backend:8000
     ports:
       - "8501:8501"
     volumes:
-      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/ui:/app/ui"
-      - "D:/Giselle_/My Project/RecommendSystem_FP-Growth_mba/data:/app/data"
+      - ../ui:/app/ui
+      - ../data:/app/data
     depends_on:
-      - backend
+      backend:
+        condition: service_started
+
+volumes:
+  db_data:

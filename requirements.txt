@@ -31,3 +31,4 @@ sqlalchemy==2.0.30
 # DBT (for analytics pipelines or transformation)
 dbt-core==1.10.2
 dbt-sqlite==1.10.0
+dbt-postgres>=1.7,<1.9

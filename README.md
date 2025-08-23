@@ -1,6 +1,6 @@
 # Market Basket Analysis Demo
 ## 1. Overview
-This project aims to build a recommendation system based on **FP-Growth** (a rule-based algorithm) and **Neural Collaborative Filtering (NCF)** to solve the **Market Basket Analysis** problem.
+This project aims to build a recommendation system based on **FP-Growth** and **Neural Collaborative Filtering (NCF)** to solve the **Market Basket Analysis** problem.
 
 FP-Growth is part of Association Rule Mining family and is widely used in recommendation systems due to its ability to handle small datasets, provide interpretable rules, and address cold-start problems—issues common in deep learning models.
 ### 1.1 Idea
@@ -48,9 +48,9 @@ Given an item purchased by a customer, the API will return a list of items that 
 - Python 3.10+ (if running locally without Docker)
 ### 5.2 Quick Start with Docker
 ```bash
-git clone https://github.com/nghonam16/RecommendSystem_FP-Growth_mba.git
+git clone https://github.com/nhnammldlnlpcvrs/Feature-Recommendation_Systems.git
 
-cd ReommendSystem_FP-Growth_mba/docker
+cd Feature-Recommendation_Systems/docker
 
 docker compose up --build
 ```
