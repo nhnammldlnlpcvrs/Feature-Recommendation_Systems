@@ -41,7 +41,7 @@ Given an item purchased by a customer, the API will return a list of items that 
 └── requirements.txt       # Python dependencies
 ```
 ## 4. System Architecture
-![System Architecture](docs/image.png)
+![System Architecture](docs/Recommendation_Systems_Rule_base.png)
 ## 5. Installation
 ### 5.1 Prerequisites
 - Docker & Docker-Compose installed
