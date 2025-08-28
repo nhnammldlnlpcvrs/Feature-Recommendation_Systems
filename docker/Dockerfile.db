@@ -1,7 +1,6 @@
 FROM postgres:14
 
-WORKDIR /app
-COPY ../fp_growth_mba /app/dbt
-
+# Copy init scripts
+COPY docker/db/initdb.d /docker-entrypoint-initdb.d
 
 EXPOSE 5432

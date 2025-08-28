@@ -2,10 +2,7 @@ version: "3.9"
 
 services:
   db:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile.db
-    image: nhnammldlnlpcvrs/rs_fpgrowth-db:latest
+    image: postgres:15
     container_name: rs_db-container
     restart: always
     environment:
@@ -16,7 +13,7 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ../db/initdb.d:/docker-entrypoint-initdb.d:ro
+      - ../data:/app/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d recommender"]
       interval: 10s
@@ -35,45 +32,17 @@ services:
       - DB_PASSWORD=admin123
       - DB_NAME=recommender
       - DB_PORT=5432
+      - DATA_PATH=/app/data
     ports:
       - "8000:8000"
     depends_on:
       db:
         condition: service_healthy
-      dl:
-        condition: service_started
     volumes:
       - ../backend:/app/backend
       - ../data:/app/data
-
-  dl:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile.dl
-    image: nhnammldlnlpcvrs/rs_fpgrowth-dl:latest
-    container_name: rs_dl-container
-    environment:
-      - MODEL_PATH=/app/models
-    volumes:
       - ../models:/app/models
-
-  dbt:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile.dbt
-    image: nhnammldlnlpcvrs/rs_fpgrowth-dbt:latest
-    container_name: rs_dbt-container
-    volumes:
-      - ../fp_growth_mba:/app
-      - ./profiles.yml:/root/.dbt/profiles.yml:ro
-      - ../models:/app/models
-      - ../data:/app/data
-    environment:
-      - DBT_PROFILES_DIR=/root/.dbt
-    depends_on:
-      db:
-        condition: service_healthy
-    command: tail -f /dev/null  # Keep the container running for interactive use
+      - ../logs:/app/logs
 
   ui:
     build:
@@ -83,6 +52,7 @@ services:
     container_name: rs_ui-container
     environment:
       - API_URL=http://backend:8000
+      - DATA_PATH=/app/data
     ports:
       - "8501:8501"
     volumes:
