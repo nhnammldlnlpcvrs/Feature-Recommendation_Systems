@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 until nc -z "$DB_HOST" "$DB_PORT"; do

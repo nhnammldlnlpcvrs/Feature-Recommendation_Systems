@@ -48,9 +48,9 @@ Given an item purchased by a customer, the API will return a list of items that 
 - Python 3.10+ (if running locally without Docker)
 ### 5.2 Quick Start with Docker
 ```bash
-git clone https://github.com/nhnammldlnlpcvrs/Feature-Recommendation_Systems.git
+git clone https://github.com/nhnammldlnlpcvrs/recommendation-systems-rule-base.git
 
-cd Feature-Recommendation_Systems/docker
+cd recommendation-systems-rule-base/docker
 
 docker compose up --build
 ```

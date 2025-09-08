@@ -30,3 +30,31 @@
 2025-08-23 14:36:08 | INFO     | backend.main | by‑item request item=paper chain kit 50's christmas top_k=3
 2025-08-23 14:36:08 | INFO     | backend.main | GET /recommend/by-item | 200 | 2.32 ms
 2025-08-23 14:36:08 | INFO     | uvicorn.access | 127.0.0.1:56986 - "GET /recommend/by-item?item=paper+chain+kit+50%27s+christmas&top_k=3 HTTP/1.1" 200
+2025-08-28 14:16:46 | INFO     | uvicorn.error | Started server process [1]
+2025-08-28 14:16:46 | INFO     | uvicorn.error | Waiting for application startup.
+2025-08-28 14:16:46 | INFO     | uvicorn.error | Application startup complete.
+2025-08-28 14:16:46 | INFO     | uvicorn.error | Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-08-28 14:17:42 | INFO     | backend.main | by‑user request user_id=14911 top_k=3
+2025-08-28 14:17:42 | INFO     | backend.main | GET /recommend/by-user | 200 | 37.93 ms
+2025-08-28 14:17:42 | INFO     | uvicorn.access | 172.18.0.4:36234 - "GET /recommend/by-user?user_id=14911&top_k=3 HTTP/1.1" 200
+2025-08-28 14:17:42 | INFO     | backend.main | by‑item request item=charlotte bag suki design top_k=3
+2025-08-28 14:17:42 | INFO     | backend.main | GET /recommend/by-item | 200 | 2.18 ms
+2025-08-28 14:17:42 | INFO     | uvicorn.access | 172.18.0.4:36236 - "GET /recommend/by-item?item=charlotte+bag+suki+design&top_k=3 HTTP/1.1" 200
+2025-08-28 14:17:42 | INFO     | backend.main | by‑item request item=paper chain kit vintage christmas top_k=3
+2025-08-28 14:17:42 | INFO     | backend.main | GET /recommend/by-item | 200 | 2.10 ms
+2025-08-28 14:17:42 | INFO     | uvicorn.access | 172.18.0.4:36252 - "GET /recommend/by-item?item=paper+chain+kit+vintage+christmas&top_k=3 HTTP/1.1" 200
+2025-08-28 14:17:42 | INFO     | backend.main | by‑item request item=red  harmonica in box top_k=3
+2025-08-28 14:17:42 | INFO     | backend.main | GET /recommend/by-item | 200 | 1.79 ms
+2025-08-28 14:17:42 | INFO     | uvicorn.access | 172.18.0.4:36254 - "GET /recommend/by-item?item=red++harmonica+in+box&top_k=3 HTTP/1.1" 200
+2025-08-28 14:23:12 | INFO     | uvicorn.error | Shutting down
+2025-08-28 14:23:12 | INFO     | uvicorn.error | Waiting for application shutdown.
+2025-08-28 14:23:12 | INFO     | uvicorn.error | Application shutdown complete.
+2025-08-28 14:23:12 | INFO     | uvicorn.error | Finished server process [1]
+2025-08-28 14:23:48 | INFO     | uvicorn.error | Started server process [1]
+2025-08-28 14:23:48 | INFO     | uvicorn.error | Waiting for application startup.
+2025-08-28 14:23:48 | INFO     | uvicorn.error | Application startup complete.
+2025-08-28 14:23:48 | INFO     | uvicorn.error | Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+2025-08-28 14:31:26 | INFO     | uvicorn.error | Shutting down
+2025-08-28 14:31:26 | INFO     | uvicorn.error | Waiting for application shutdown.
+2025-08-28 14:31:26 | INFO     | uvicorn.error | Application shutdown complete.
+2025-08-28 14:31:26 | INFO     | uvicorn.error | Finished server process [1]
