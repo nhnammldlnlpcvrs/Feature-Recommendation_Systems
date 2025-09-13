@@ -1,3 +1,4 @@
-.logs/
-.docs/
+logs/
+docs/
 .__pycache__/
+data/
