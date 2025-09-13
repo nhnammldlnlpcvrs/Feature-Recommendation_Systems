@@ -1,4 +1,9 @@
 logs/
 docs/
 .__pycache__/
-data/
+*fp_growth_mba.db
+*fpgrowth.db
+*products.csv
+*rules.csv
+*transactions_fpgrowth.csv
+*user_item_dl.csv
