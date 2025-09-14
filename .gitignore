@@ -1,6 +1,6 @@
 logs/
 docs/
-.__pycache__/
+__pycache__/
 *fp_growth_mba.db
 *fpgrowth.db
 *products.csv
@@ -9,3 +9,4 @@ docs/
 *user_item_dl.csv
 db/
 initdb.d/
+*.sh
