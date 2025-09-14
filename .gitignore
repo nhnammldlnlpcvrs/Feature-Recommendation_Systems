@@ -5,5 +5,7 @@ docs/
 *fpgrowth.db
 *products.csv
 *rules.csv
-*transactions_fpgrowth.csv
+*transaction_fpgrowth.csv
 *user_item_dl.csv
+db/
+initdb.d/
