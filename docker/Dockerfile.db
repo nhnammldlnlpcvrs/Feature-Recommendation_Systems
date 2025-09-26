@@ -1,9 +1,0 @@
-FROM alpine:3.19
-
-RUN apk add --no-cache sqlite
-
-WORKDIR /app/data
-
-COPY data/fp_growth_mba.db /app/data/fp_growth_mba.db
-
-ENTRYPOINT ["sqlite3", "/app/data/fp_growth_mba.db"]
