@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    image: nhnammldlnlpcvrs/rs_fpgrowth-backend:latest
+    container_name: rs_backend-container
+    restart: always
+    environment:
+      DB_PATH: /app/data/fp_growth_mba.db
+      DATA_PATH: /app/data
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend:/app/backend
+      - ../data:/app/data
+      - ../models:/app/models
+      - ../logs:/app/logs
+    command: >
+      sh -c "uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
+
+  ui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.ui
+    image: nhnammldlnlpcvrs/rs_fpgrowth-ui:latest
+    container_name: rs_ui-container
+    restart: always
+    environment:
+      API_URL: http://backend:8000
+      DATA_PATH: /app/data
+    ports:
+      - "8501:8501"
+    volumes:
+      - ../ui:/app/ui
+      - ../data:/app/data
+    depends_on:
+      - backend
+    command: >
+      sh -c "streamlit run ui/streamlit_app.py --server.port=8501 --server.address=0.0.0.0"
