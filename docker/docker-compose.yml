@@ -1,6 +1,21 @@
 version: "3.9"
 
 services:
+  db:
+    image: postgres:15
+    container_name: rs_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fp_growth_mba
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+      - ../data:/data
+      - ./postgres_data:/var/lib/postgresql/data
+
   backend:
     build:
       context: ..
@@ -9,7 +24,7 @@ services:
     container_name: rs_backend-container
     restart: always
     environment:
-      DB_PATH: /app/data/fp_growth_mba.db
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/fp_growth_mba
       DATA_PATH: /app/data
     ports:
       - "8000:8000"
@@ -18,6 +33,8 @@ services:
       - ../data:/app/data
       - ../models:/app/models
       - ../logs:/app/logs
+    depends_on:
+      - db
     command: >
       sh -c "uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
 
