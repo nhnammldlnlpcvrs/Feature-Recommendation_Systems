@@ -8,6 +8,5 @@ __pycache__/
 *rules.csv
 *transaction_fpgrowth.csv
 *user_item_dl.csv
-db/
-initdb.d/
-*.sh
+
+postgres_data/
