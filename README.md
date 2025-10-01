@@ -16,7 +16,7 @@ Given an item purchased by a customer, the API will return a list of items that 
 - **dbt (Data Build Tool)** for data transformation
 - **Docker** and **Docker Compose** for containerization
 - **Streamlit** for building the frontend UI
-- **SQLite** for local database
+- **Postgres** for local database
 - **FP-Growth** algorithm and **NCF** deep learning model
 ## 3. Repository Structure
 ```bash
@@ -100,9 +100,9 @@ dbt test
 
 ### 6.5 Export Models to CSV
 ```bash
-cd ..
+cd notebooks
 
-python export_models.py
+python export_data.py
 ```
 This script will read the fp_growth_mba.db SQLite file and export the final model tables (e.g., transaction_fpgrowth, user_item_dl) into CSV files inside the **data/** folder.
 ## 7. API Overview
