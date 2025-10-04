@@ -5,9 +5,9 @@ from pathlib import Path
 DB_CONFIG = {
     "host": "localhost",
     "port": "5432",
-    "dbname": "fp_growth_mba",
-    "user": "your_username",
-    "password": "your_password"
+    "dbname": "db_postgres",
+    "user": "nhnammldlnlpcvrs",
+    "password": "abc123"
 }
 
 OUTPUT_DIR = Path("../data")
