@@ -22,7 +22,7 @@ Given an item purchased by a customer, the API will return a list of items that 
 │   ├── recommender_dl.py   # NCF recommendation logic
 │   ├── logger.py           # Logging configuration
 │   └── ...
-├── fp_growth_mba/         # dbt project (models, analysis, seeds, tests, ...)
+├── market_basket_analysis/         # dbt project (models, analysis, seeds, tests, ...)
 ├── ui/                    # Streamlit user interface
 ├── data/                  # Input datasets (.csv, .db)
 ├── models/                # Trained models (NCF, FP rules)
