@@ -9,15 +9,10 @@ Given an item purchased by a customer, the API will return a list of items that 
 - [FP-Growth Explanation on Medium](https://medium.com/@anilcogalan/fp-growth-algorithm-how-to-analyze-user-behavior-and-outrank-your-competitors-c39af08879db)
 - [Use cases of Association Rule Mining - Kaggle](https://www.kaggle.com/code/mohammedderouiche/association-rule-mining-for-mba)
 ---
-## 2. Technologies Used
-- **Linux**
 
-- **FastAPI** for backend RESTful APIs with logging
-- **dbt (Data Build Tool)** for data transformation
-- **Docker** and **Docker Compose** for containerization
-- **Streamlit** for building the frontend UI
-- **Postgres** for local database
-- **FP-Growth** algorithm and **NCF** deep learning model
+## 2. System Architecture
+![System Architecture](docs/Recommendation_Systems_Rule_base.png)
+
 ## 3. Repository Structure
 ```bash
 .
@@ -40,8 +35,18 @@ Given an item purchased by a customer, the API will return a list of items that 
 ├── notebooks/             # Exploratory notebooks for training
 └── requirements.txt       # Python dependencies
 ```
-## 4. System Architecture
-![System Architecture](docs/Recommendation_Systems_Rule_base.png)
+
+## 4. Technologies Used
+- **Linux**
+
+- **FastAPI** for backend RESTful APIs with logging
+- **dbt (Data Build Tool)** for data transformation
+- **Docker** and **Docker Compose** for containerization
+- **Streamlit** for building the frontend UI
+- **Postgres** for local database
+- **FP-Growth** algorithm and **NCF** deep learning model
+
+
 ## 5. Installation
 ### 5.1 Prerequisites
 - Docker & Docker-Compose installed
