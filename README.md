@@ -66,7 +66,7 @@ docker compose up --build
 
 #### Run Backend API
 ```bash
-pip install -r requirements.txt
+pip install -r requirements_dev.txt
 
 cd backend
 
@@ -82,7 +82,7 @@ streamlit run streamlit_app.py
 
 ### 6.1 Initialize dbt
 ```bash
-cd fp_growth_mba
+cd market_basket_analysis
 
 dbt deps
 ```
