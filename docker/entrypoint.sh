@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
-if [ ! -f "/app/data/fp_growth_mba.db" ]; then
-    echo "Creating SQLite DB..."
-    sqlite3 /app/data/fp_growth_mba.db "VACUUM;"
-fi
+echo "Waiting for PostgreSQL to be ready..."
 
-# Run backend server
+until pg_isready -h db -p 5432 -U postgres > /dev/null 2>&1; do
+  sleep 1
+done
+
+echo "PostgreSQL is ready. Starting backend..."
+
 exec uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload

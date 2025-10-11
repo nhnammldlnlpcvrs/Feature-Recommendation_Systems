@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: abc123
       POSTGRES_DB: fp_growth_mba
     ports:
       - "5432:5432"
@@ -24,7 +24,7 @@ services:
     container_name: rs_backend-container
     restart: always
     environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@db:5432/fp_growth_mba
+      DATABASE_URL: postgresql://postgres:abc123@rs_postgres:5432/fp_growth_mba
       DATA_PATH: /app/data
     ports:
       - "8000:8000"

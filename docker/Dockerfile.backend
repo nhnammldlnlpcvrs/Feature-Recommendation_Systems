@@ -4,17 +4,18 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends bash curl sqlite3 \
- && rm -rf /var/lib/apt/lists/*
+    && apt-get install -y --no-install-recommends bash curl libpq-dev gcc \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt \
- && pip install --no-cache-dir dbt-core dbt-sqlite fastapi uvicorn[standard]
+COPY backend/requirements.txt ./requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-COPY backend/       backend/
-COPY fp_growth_mba/ fp_growth_mba/
+RUN pip install --no-cache-dir dbt-core dbt-postgres
+
+COPY backend/ backend/
+COPY market_basket_analysis/ market_basket_analysis/
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh

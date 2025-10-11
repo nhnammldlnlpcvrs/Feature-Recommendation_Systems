@@ -3,11 +3,10 @@ market_basket_analysis:
   outputs:
     dev:
       type: postgres
-      host: db
+      host: localhost
       user: postgres
-      password: postgres
+      password: abc123
       port: 5432
       dbname: fp_growth_mba
       schema: public
       threads: 4
-      keepalives_idle: 0
