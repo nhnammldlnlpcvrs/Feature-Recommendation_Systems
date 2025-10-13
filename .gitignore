@@ -10,3 +10,5 @@ __pycache__/
 *user_item_dl.csv
 
 postgres_data/
+
+.ipynb_checkpoints/
