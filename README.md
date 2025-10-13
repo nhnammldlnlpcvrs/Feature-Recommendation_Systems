@@ -105,7 +105,7 @@ dbt test
 
 ### 6.5 Export Models to CSV
 ```bash
-cd notebooks
+cd export
 
 python export_data.py
 ```
