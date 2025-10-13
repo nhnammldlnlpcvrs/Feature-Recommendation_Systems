@@ -24,7 +24,7 @@ services:
     container_name: rs_backend-container
     restart: always
     environment:
-      DATABASE_URL: postgresql://postgres:abc123@rs_postgres:5432/fp_growth_mba
+      DATABASE_URL: postgresql://postgres:abc123@db:5432/fp_growth_mba
       DATA_PATH: /app/data
     ports:
       - "8000:8000"
@@ -35,8 +35,6 @@ services:
       - ../logs:/app/logs
     depends_on:
       - db
-    command: >
-      sh -c "uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
 
   ui:
     build:
