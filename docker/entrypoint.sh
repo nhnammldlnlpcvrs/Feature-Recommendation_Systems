@@ -3,7 +3,12 @@ set -e
 
 echo "Waiting for PostgreSQL to be ready..."
 
-until pg_isready -h db -p 5432 -U postgres > /dev/null 2>&1; do
+until python -c "import psycopg2; import sys; import time; 
+try:
+    psycopg2.connect('dbname=fp_growth_mba user=postgres password=abc123 host=db port=5432'); 
+    sys.exit(0)
+except Exception:
+    time.sleep(1)" > /dev/null 2>&1; do
   sleep 1
 done
 
