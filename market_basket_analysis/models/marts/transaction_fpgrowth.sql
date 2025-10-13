@@ -2,7 +2,7 @@
 
 with raw as (
     select
-        invoice_no as transaction_id,
+        invoiceno as transaction_id,
         lower(trim(description)) as item_name
     from {{ ref('stg_online_retail') }}
     where quantity > 0 and description is not null
