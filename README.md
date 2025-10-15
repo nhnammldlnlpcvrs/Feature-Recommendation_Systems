@@ -22,7 +22,7 @@
    - [Run Models](#63-run-models)
    - [Test Models](#64-test-models-optional)
    - [Export Models to CSV](#65-export-models-to-csv)
-   
+
 **7. [API Overview](#7-api-overview)**
    - [Endpoints](#endpoints)
    - [Example Requests](#example-requests)
@@ -51,7 +51,7 @@ Given an item purchased by a customer, the API will return a list of items that 
 │   ├── recommender_dl.py   # NCF recommendation logic
 │   ├── logger.py           # Logging configuration
 │   └── ...
-├── market_basket_analysis/         # dbt project (models, analysis, seeds, tests, ...)
+├── dbt_project/         # dbt project (models, analysis, seeds, tests, ...)
 ├── ui/                    # Streamlit user interface
 ├── data/                  # Input datasets (.csv, .db)
 ├── models/                # Trained models (NCF, FP rules)
@@ -111,7 +111,7 @@ streamlit run streamlit_app.py
 
 ### 6.1 Initialize dbt
 ```bash
-cd dbt
+cd dbt_project
 
 dbt deps
 ```
