@@ -1,4 +1,34 @@
 # Market Basket Analysis Demo
+
+# Table of Contents
+**1. [Overview](#1-overview)**
+   - [Idea](#11-idea)
+   - [Reference Links](#12-reference-links)
+
+**2. [System Architecture](#2-system-architecture)**
+
+**3. [Repository Structure](#3-repository-structure)**
+
+**4. [Technologies Used](#4-technologies-used)**
+
+**5. [Installation](#5-installation)**
+   - [Prerequisites](#51-prerequisites)
+   - [Quick Start with Docker](#52-quick-start-with-docker)
+   - [Run without Docker](#53-run-without-docker-optional)
+
+**6. [Run dbt Project](#6-run-dbt-project)**
+   - [Initialize dbt](#61-initialize-dbt)
+   - [Seed data](#62-seed-data)
+   - [Run Models](#63-run-models)
+   - [Test Models](#64-test-models-optional)
+   - [Export Models to CSV](#65-export-models-to-csv)
+   
+**7. [API Overview](#7-api-overview)**
+   - [Endpoints](#endpoints)
+   - [Example Requests](#example-requests)
+   - [Status Codes](#-status-codes)
+
+
 ## 1. Overview
 This project aims to build a recommendation system based on **FP-Growth** and **Neural Collaborative Filtering (NCF)** to solve the **Market Basket Analysis** problem.
 
@@ -6,7 +36,6 @@ FP-Growth is part of Association Rule Mining family and is widely used in recomm
 ### 1.1 Idea
 Given an item purchased by a customer, the API will return a list of items that are frequently bought together based on FP-Growth association rules. In addition, we integrate a personalized recommendation model (NCF) trained via deep learning to boost accuracy.
 ### 1.2 Reference Links
-- [FP-Growth Explanation on Medium](https://medium.com/@anilcogalan/fp-growth-algorithm-how-to-analyze-user-behavior-and-outrank-your-competitors-c39af08879db)
 - [Use cases of Association Rule Mining - Kaggle](https://www.kaggle.com/code/mohammedderouiche/association-rule-mining-for-mba)
 ---
 
@@ -82,7 +111,7 @@ streamlit run streamlit_app.py
 
 ### 6.1 Initialize dbt
 ```bash
-cd market_basket_analysis
+cd dbt
 
 dbt deps
 ```
@@ -92,7 +121,7 @@ This step downloads all dbt packages defined in your ***packages.yml***
 ```bash
 dbt seed
 ```
-This will load the CSV files inside the seeds/ folder into your SQLite database.
+This will load the CSV files inside the seeds/ folder into your Postgres database.
 ### 6.3 Run Models
 ```bash
 dbt run
@@ -105,18 +134,18 @@ dbt test
 
 ### 6.5 Export Models to CSV
 ```bash
-cd export
+cd utils
 
 python export_data.py
 ```
-This script will read the fp_growth_mba.db SQLite file and export the final model tables (e.g., transaction_fpgrowth, user_item_dl) into CSV files inside the **data/** folder.
+This script will read the fp_growth_mba.db Postgres file and export the final model tables (e.g., transaction_fpgrowth, user_item_dl) into CSV files inside the **data/** folder.
 ## 7. API Overview
 Base URL: http://localhost:8000
 
 Interactive Docs
 - Swagger UI: http://localhost:8000/docs
 
-Endpoints
+### Endpoints
 | Method | Endpoint             | Query Params                              | Description                                                                            |
 | ------ | -------------------- | ----------------------------------------- | -------------------------------------------------------------------------------------- |
 | GET    | `/recommend/by-item` | `item` (str), `top_k` (int, default=5)    | Recommend items frequently bought together using **FP-Growth**.                        |
