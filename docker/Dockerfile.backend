@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir dbt-core dbt-postgres
 
 COPY backend/ backend/
-COPY market_basket_analysis/ market_basket_analysis/
+COPY dbt/ dbt/
 
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN sed -i 's/\r$//' /entrypoint.sh && chmod +x /entrypoint.sh

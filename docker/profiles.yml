@@ -1,4 +1,4 @@
-market_basket_analysis:
+dbt:
   target: dev
   outputs:
     dev:
