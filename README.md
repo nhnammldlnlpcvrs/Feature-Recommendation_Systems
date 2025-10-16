@@ -3,6 +3,7 @@
 # Table of Contents
 **1. [Overview](#1-overview)**
    - [Idea](#11-idea)
+
    - [Reference Links](#12-reference-links)
 
 **2. [System Architecture](#2-system-architecture)**
@@ -13,11 +14,13 @@
 
 **5. [Installation](#5-installation)**
    - [Prerequisites](#51-prerequisites)
+
    - [Quick Start with Docker](#52-quick-start-with-docker)
    - [Run without Docker](#53-run-without-docker-optional)
 
 **6. [Run dbt Project](#6-run-dbt-project)**
    - [Initialize dbt](#61-initialize-dbt)
+
    - [Seed data](#62-seed-data)
    - [Run Models](#63-run-models)
    - [Test Models](#64-test-models-optional)
@@ -26,6 +29,7 @@
 
 **7. [API Overview](#7-api-overview)**
    - [Endpoints](#endpoints)
+   
    - [Example Requests](#example-requests)
    - [Status Codes](#-status-codes)
 
