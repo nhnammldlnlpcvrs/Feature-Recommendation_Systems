@@ -6,7 +6,6 @@ with cleaned as (
     where quantity > 0 
       and unitprice > 0 
       and customerid is not null
-      and customerid <> ''
       and not invoiceno like 'C%'
 )
 
