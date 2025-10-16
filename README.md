@@ -22,6 +22,7 @@
    - [Run Models](#63-run-models)
    - [Test Models](#64-test-models-optional)
    - [Export Models to CSV](#65-export-models-to-csv)
+   - [Summary Workflow](#66-summary-workflow)
 
 **7. [API Overview](#7-api-overview)**
    - [Endpoints](#endpoints)
@@ -109,28 +110,53 @@ streamlit run streamlit_app.py
 ```
 ## 6. Run dbt Project
 
+After setting up the environment and database connection, you can now execute the dbt pipeline to transform, clean, and prepare analytical tables.
+
 ### 6.1 Initialize dbt
 ```bash
 cd dbt_project
 
 dbt deps
 ```
-This step downloads all dbt packages defined in your ***packages.yml***
+This command installs all dbt packages defined in the **packages.yml** file, such as:
+
+- dbt_utils
+
+- dbt_labs
+
+A package-lock.yml file will be automatically created to lock dependency versions.
 
 ### 6.2 Seed data
 ```bash
 dbt seed
 ```
-This will load the CSV files inside the seeds/ folder into your Postgres database.
+This command loads the CSV files located in the **seeds**/ folder into your PostgreSQL database.
+These raw datasets act as the foundation for all subsequent transformations.
 ### 6.3 Run Models
 ```bash
 dbt run
 ```
-This executes all the dbt models (SQL transformations) and creates the final tables inside the database.
+This executes all dbt models (SQL transformations) defined in your **models**/ directory.
+It will build the cleaned and transformed tables — for example:
+
+- stg_online_retail
+
+- user_item_dl
+
+- transaction_fpgrowth
+
+All models will be materialized in your target schema (e.g., public) of the PostgreSQL database.
 ### 6.4 Test Models (Optional)
 ```bash
 dbt test
 ```
+Runs all the defined data tests in your project to validate data quality, such as:
+
+- Non-null checks
+
+- Uniqueness constraints
+
+- Referential integrity
 
 ### 6.5 Export Models to CSV
 ```bash
@@ -138,7 +164,20 @@ cd utils
 
 python export_data.py
 ```
-This script will read the fp_growth_mba.db Postgres file and export the final model tables (e.g., transaction_fpgrowth, user_item_dl) into CSV files inside the **data/** folder.
+This script connects to your fp_growth_mba PostgreSQL database and exports the final dbt model tables (e.g., transaction_fpgrowth, user_item_dl) as CSV files into the **data**/ directory.
+
+### 6.6 Summary Workflow
+
+- Install dependencies -> dbt deps
+
+- Load raw data -> dbt seed
+
+- Run transformations -> dbt run
+
+- (Optional) Test data -> dbt test
+
+- Export results -> python export_data.py
+
 ## 7. API Overview
 Base URL: http://localhost:8000
 
