@@ -19,13 +19,14 @@
    - [Run without Docker](#53-run-without-docker-optional)
 
 **6. [Run dbt Project](#6-run-dbt-project)**
-   - [Initialize dbt](#61-initialize-dbt)
+   - [Configure Database Connection](#61-configure-database-connection)
 
-   - [Seed data](#62-seed-data)
-   - [Run Models](#63-run-models)
-   - [Test Models](#64-test-models-optional)
-   - [Export Models to CSV](#65-export-models-to-csv)
-   - [Summary Workflow](#66-summary-workflow)
+   - [Initialize dbt](#62-initialize-dbt)
+   - [Seed data](#63-seed-data)
+   - [Run Models](#64-run-models)
+   - [Test Models](#65-test-models-optional)
+   - [Export Models to CSV](#66-export-models-to-csv)
+   - [Summary Workflow](#67-summary-workflow)
 
 **7. [API Overview](#7-api-overview)**
    - [Endpoints](#endpoints)
@@ -116,7 +117,38 @@ streamlit run streamlit_app.py
 
 After setting up the environment and database connection, you can now execute the dbt pipeline to transform, clean, and prepare analytical tables.
 
-### 6.1 Initialize dbt
+### 6.1 Configure Database Connection 
+
+**Create or edit your dbt profiles.yml file:**
+
+- Linux/macOS: 
+```bash
+~/.dbt/profiles.yml
+```
+
+- Windows: 
+```bash
+%USERPROFILE%\.dbt\profiles.yml
+```
+Example:
+
+```yml
+dbt_project:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: postgres
+      password: your_password
+      port: 5432
+      dbname: fp_growth_mba
+      schema: public
+      threads: 4
+      keepalives_idle: 0
+```
+
+### 6.2 Initialize dbt
 ```bash
 cd dbt_project
 
@@ -130,13 +162,13 @@ This command installs all dbt packages defined in the **packages.yml** file, suc
 
 A package-lock.yml file will be automatically created to lock dependency versions.
 
-### 6.2 Seed data
+### 6.3 Seed data
 ```bash
 dbt seed
 ```
 This command loads the CSV files located in the **seeds**/ folder into your PostgreSQL database.
 These raw datasets act as the foundation for all subsequent transformations.
-### 6.3 Run Models
+### 6.4 Run Models
 ```bash
 dbt run
 ```
@@ -150,7 +182,7 @@ It will build the cleaned and transformed tables — for example:
 - transaction_fpgrowth
 
 All models will be materialized in your target schema (e.g., public) of the PostgreSQL database.
-### 6.4 Test Models (Optional)
+### 6.5 Test Models (Optional)
 ```bash
 dbt test
 ```
@@ -162,7 +194,7 @@ Runs all the defined data tests in your project to validate data quality, such a
 
 - Referential integrity
 
-### 6.5 Export Models to CSV
+### 6.6 Export Models to CSV
 ```bash
 cd utils
 
@@ -170,7 +202,7 @@ python export_data.py
 ```
 This script connects to your fp_growth_mba PostgreSQL database and exports the final dbt model tables (e.g., transaction_fpgrowth, user_item_dl) as CSV files into the **data**/ directory.
 
-### 6.6 Summary Workflow
+### 6.7 Summary Workflow
 
 - Install dependencies -> dbt deps
 
