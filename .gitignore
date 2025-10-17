@@ -2,13 +2,6 @@ logs/
 __pycache__/
 *.pyc
 
-*fp_growth_mba.db
-*fpgrowth.db
-*products.csv
-*rules.csv
-*transaction_fpgrowth.csv
-*user_item_dl.csv
-
 postgres_data/
 
 .ipynb_checkpoints/
