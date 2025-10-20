@@ -6,4 +6,5 @@ postgres_data/
 
 .ipynb_checkpoints/
 
-*.user.yml
+.user.yml
+profiles.yml
