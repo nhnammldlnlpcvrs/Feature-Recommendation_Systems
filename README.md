@@ -103,8 +103,6 @@ docker compose up --build
 ```bash
 pip install -r requirements_dev.txt
 
-cd backend
-
 uvicorn backend.main:app --reload
 ```
 #### Run Frontend
