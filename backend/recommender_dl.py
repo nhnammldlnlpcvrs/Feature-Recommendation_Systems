@@ -27,7 +27,8 @@ class DLRecommender:
             raise FileNotFoundError(f"Model checkpoint not found: {ckpt_path}")
 
         # Load checkpoint
-        ckpt = torch.load(ckpt_path, map_location="cpu")
+        ckpt = torch.load(ckpt_path, map_location="cpu", weights_only=False)
+
 
         # Load user/item mappings
         self.user2idx: Dict[int, int] = {}
