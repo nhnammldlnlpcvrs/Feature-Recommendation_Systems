@@ -27,7 +27,8 @@ class FPGrowthRecommender:
             return [str(value).strip().lower()]
 
         rules["antecedent"] = rules["antecedent"].apply(parse)
-        rules["consequent"] = rules["consequent"].astype(str).str.strip().lower()
+        rules["consequent"] = rules["consequent"].astype(str).str.strip().str.lower()
+
 
         # Sort rules by confidence descending
         rules = rules.sort_values("confidence", ascending=False, ignore_index=True)
