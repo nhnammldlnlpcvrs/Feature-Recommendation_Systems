@@ -1,14 +1,14 @@
 import streamlit as st
 import requests, os, pathlib, pandas as pd, ast
 
-# ── Paths
+# Paths
 ROOT_DIR = pathlib.Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data"
 PRODUCTS_CSV = DATA_DIR / "products.csv"
 USER_ITEM_CSV = DATA_DIR / "user_item_dl.csv"
 RULES_CSV = DATA_DIR / "rules.csv"
 
-# ── Load data
+# Load data
 products_df = pd.read_csv(PRODUCTS_CSV) if PRODUCTS_CSV.exists() else None
 user_item_df = pd.read_csv(USER_ITEM_CSV) if USER_ITEM_CSV.exists() else None
 rules_df = pd.read_csv(RULES_CSV) if RULES_CSV.exists() else None
@@ -25,14 +25,14 @@ for row in rules_df["antecedent"].astype(str):
     except Exception:
         ante_set.add(row.strip().lower())
 
-# ── Config & CSS
+# Config & CSS
 API_URL = os.getenv("API_URL", "http://localhost:8000")
 st.set_page_config("Hybrid Recommender System", "💼", layout="centered")
 css_path = pathlib.Path(__file__).parent / "style.css"
 if css_path.exists():
     st.markdown(f"<style>{css_path.read_text(encoding='utf-8')}</style>", unsafe_allow_html=True)
 
-# ── Helpers
+# Helpers
 def lookup_meta(name: str):
     if products_df is None:
         return {"name": name, "price": None, "category": None}
@@ -59,11 +59,11 @@ def render_block(title, items):
         st.markdown(html_card(lookup_meta(name), score), unsafe_allow_html=True)
     st.markdown("</div></div>", unsafe_allow_html=True)
 
-# ── User list
+# User list
 user_rank = user_item_df["user_id"].value_counts().rename_axis("user_id").reset_index(name="count")
 all_user_ids = user_rank.user_id.astype(int).tolist()
 
-# ── UI
+# UI
 st.markdown("<h2>Hybrid Recommender System</h2>", unsafe_allow_html=True)
 col_u, col_i = st.columns(2)
 
@@ -89,7 +89,7 @@ if st.button("Generate Recommendations", disabled=len(chosen) == 0 and len(rule_
         ai_rec = []
         try:
             r = requests.get(f"{API_URL}/recommend/by-user", params={"user_id": sel_user, "top_k": k}, timeout=30)
-            ai_rec = r.json().get("suggestions", [])
+            ai_rec = r.json().get("results", [])
         except Exception as e:
             st.error(f"NCF Recommendation Error: {e}")
 
@@ -98,7 +98,7 @@ if st.button("Generate Recommendations", disabled=len(chosen) == 0 and len(rule_
         for p in chosen:
             try:
                 r = requests.get(f"{API_URL}/recommend/by-item", params={"item": p, "top_k": k}, timeout=30)
-                fp_pool.extend(r.json().get("suggestions", []))
+                fp_pool.extend(r.json().get("results", []))
             except Exception as e:
                 st.error(f"FP-Growth Recommendation Error for '{p}': {e}")
 
@@ -125,4 +125,4 @@ if st.button("Generate Recommendations", disabled=len(chosen) == 0 and len(rule_
 
     st.markdown("---")
 
-st.caption("Developed using FP-Growth + NCF Hybrid Recommendation Model")
+st.caption("Developed using FP-Growth Algorithm and NCF Hybrid Recommendation Model")
