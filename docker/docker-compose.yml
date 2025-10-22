@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:15
+    container_name: rs_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: abc123
+      POSTGRES_DB: fp_growth_mba
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/initdb.d:/docker-entrypoint-initdb.d
+      - ../data:/data
+      - ./postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    image: nhnammldlnlpcvrs/rs_fpgrowth-backend:latest
+    container_name: rs_backend-container
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://postgres:abc123@db:5432/fp_growth_mba
+      DATA_PATH: /app/data
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend:/app/backend
+      - ../data:/app/data
+      - ../models:/app/models
+      - ../logs:/app/logs
+    depends_on:
+      - db
+
+  ui:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.ui
+    image: nhnammldlnlpcvrs/rs_fpgrowth-ui:latest
+    container_name: rs_ui-container
+    restart: always
+    environment:
+      API_URL: http://backend:8000
+      DATA_PATH: /app/data
+    ports:
+      - "8501:8501"
+    volumes:
+      - ../ui:/app/ui
+      - ../data:/app/data
+    depends_on:
+      - backend
+    command: >
+      sh -c "streamlit run ui/streamlit_app.py --server.port=8501 --server.address=0.0.0.0"

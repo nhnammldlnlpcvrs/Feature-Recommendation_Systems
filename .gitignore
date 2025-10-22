@@ -1,0 +1,10 @@
+logs/
+__pycache__/
+*.pyc
+
+postgres_data/
+
+.ipynb_checkpoints/
+
+.user.yml
+profiles.yml

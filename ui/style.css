@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+body {
+    background-color: #f5faff;
+    font-family: 'Poppins', sans-serif;
+    color: #212529;
+    line-height: 1.6;
+}
+
+h2 {
+    color: #189eff;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.recommend-box h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #189eff;
+    margin-bottom: 12px;
+}
+
+.recommend-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease-in-out;
+}
+
+.recommend-box:hover {
+    transform: translateY(-3px);
+}
+
+.recommend-item {
+    background-color: #eaf6ff;
+    border-left: 6px solid #189eff;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+    color: #1c1c1e;
+}
+
+.recommend-item:hover {
+    background-color: #d8efff;
+}
+
+.item-price {
+    color: #f57c00;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.item-cat {
+    color: #757575;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.stButton > button {
+    background-color: #189eff;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 10px 24px;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.stButton > button:hover {
+    background-color: #0f7fd0;
+    transform: translateY(-1px);
+}
+
+[data-baseweb="select"] {
+    margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+    h2 {
+        font-size: 24px;
+    }
+    .recommend-box {
+        padding: 18px;
+    }
+    .recommend-item {
+        font-size: 15px;
+    }
+}
+
+.item-rank {
+    color: #4caf50;
+    font-weight: 500;
+    font-size: 14px;
+}
+
