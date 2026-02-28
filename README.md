@@ -46,7 +46,10 @@ Given an item purchased by a customer, the API will return a list of items that 
 ---
 
 ## 2. System Architecture
-![System Architecture](imgs/Recommendation_Systems_Rule_base.png)
+
+<p align="center">
+  <img src="imgs/Recommendation_Systems_Rule_base.png" alt="System Architecture" width="1100"/>
+</p>
 
 ## 3. Repository Structure
 ```bash
